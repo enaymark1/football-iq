@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --bg: 10 11 13;
+  --panel: 20 23 27;
+  --raised: 28 32 38;
+  --line: 40 45 53;
+  --ink: 232 234 237;
+  --muted: 150 157 168;
+  --faint: 98 105 116;
+  --accent: 47 211 107;
+  --accent-ink: 6 22 12;
+
+  /* Gráficos: series categóricas validadas para daltonismo sobre la superficie oscura (todas las parejas, 3 slots). */
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500; /* solo junto a las otras en barras adyacentes; en el radar, 4 jugadores van separados */
+  --neutral-mark: #8b929c;
+  --grid: #262b32;
+}
+
+html, body, #root { height: 100%; }
+body {
+  @apply bg-bg text-ink font-sans antialiased;
+  font-feature-settings: "cv11", "ss01";
+}
+.tabular { font-variant-numeric: tabular-nums; }
+td.tabular { white-space: nowrap; }
+
+/* Barra de desplazamiento discreta */
+* { scrollbar-width: thin; scrollbar-color: rgb(var(--line)) transparent; }
+
+@layer components {
+  .card { @apply rounded-lg border border-line/80 bg-panel; }
+  .card-pad { @apply p-4 sm:p-5; }
+  .label { @apply text-[11px] font-medium uppercase tracking-[0.08em] text-muted; }
+  .input {
+    @apply h-9 w-full rounded-md border border-line bg-bg px-3 text-sm text-ink placeholder:text-faint
+      focus:border-accent/70 focus:outline-none focus:ring-2 focus:ring-accent/20;
+  }
+  .btn {
+    @apply inline-flex h-9 items-center justify-center gap-2 rounded-md px-3.5 text-sm font-medium transition-colors
+      disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40;
+  }
+  .btn-primary { @apply btn bg-accent text-accent-ink hover:bg-accent/90; }
+  .btn-ghost { @apply btn border border-line bg-raised/60 text-ink hover:bg-raised; }
+  .table-head { @apply sticky top-0 z-10 bg-panel text-left text-[11px] font-medium uppercase tracking-[0.06em] text-muted; }
+  .link { @apply text-ink hover:text-accent transition-colors; }
+}
+
+/* Recharts: textos con tokens de texto, nunca con el color de la serie */
+.recharts-cartesian-axis-tick-value, .recharts-polar-angle-axis-tick-value { fill: rgb(var(--muted)); font-size: 11px; }
+.recharts-default-tooltip { border-radius: 8px !important; }

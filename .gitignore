@@ -1,0 +1,25 @@
+# Python
+backend/.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Base de datos y modelos generados (se recrean con los scripts)
+backend/*.db
+backend/*.db-wal
+backend/*.db-shm
+backend/artifacts/
+
+# Datos descargados (pesan ~65 MB; la muestra de datasets/sample SÍ se versiona)
+datasets/raw/
+datasets/reports/
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# Configuración local
+.env
+backend/.env
+frontend/.env
+*.tsbuildinfo
